@@ -1,6 +1,6 @@
 import { useRollbar } from '@rollbar/react'
 import { useFormik } from 'formik'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
@@ -39,15 +39,16 @@ const RegistrationPage = () => {
       sendData({
         url: routes.signupPath(),
         data: { username: values.username, password: values.password },
-        onSuccessCb: resp => {
+        onSuccessCb: (resp) => {
           dispatch(actions.setCredentials(resp.data))
           navigate(routes.rootPage())
         },
-        onErrorCb: err => {
+        onErrorCb: (err) => {
           if (err.response?.status === 409) {
             setRegistrationFailed(true)
             inputRef.current.select()
-          } else {
+          } 
+          else {
             rollbar.error('RegistrationPage sendData error', err)
             toast.error(t('error.network'))
           }
