@@ -12,12 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Teihden/frontend-project-12.git"
+    "url": "git+https://github.com/senyaevil/frontend-project-12.git"
   },
   "author": "s",
   "license": "ISC",
-  },
-  "homepage": "https://github.com/Teihden/frontend-project-12#readme",
+  "homepage": "https://github.com/senyaevil/frontend-project-12#readme",
   "dependencies": {
     "@hexlet/chat-server": "^2.0.0"
   },
