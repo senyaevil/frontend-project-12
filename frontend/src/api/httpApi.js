@@ -17,11 +17,11 @@ const request = (
   data,
   timeout: 5000,
 })
-  .then(resp => {
+  .then((resp) => {
     console.debug(resp)
     onSuccessCb(resp)
   })
-  .catch(err => {
+  .catch((err) => {
     console.error(err)
     onErrorCb(err)
   })
