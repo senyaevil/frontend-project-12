@@ -14,10 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/Teihden/frontend-project-12.git"
   },
-  "author": "Teihden",
+  "author": "s",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Teihden/frontend-project-12.git/issues"
   },
   "homepage": "https://github.com/Teihden/frontend-project-12#readme",
   "dependencies": {
