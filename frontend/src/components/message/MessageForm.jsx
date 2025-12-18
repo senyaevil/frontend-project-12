@@ -32,7 +32,6 @@ const MessageForm = () => {
         channelId: activeChannelId,
         username,
       }
-      
       addMessage(message)
       formik.resetForm()
 
