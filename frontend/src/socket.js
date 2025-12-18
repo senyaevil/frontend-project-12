@@ -27,7 +27,7 @@ const socketInit = (store) => {
 
   socket.on('removeChannel', (payload) => {
     store.dispatch(channelsApi.util.updateQueryData('getChannels', undefined, (draftChannels) => {
-      const newChannels = draftChannels.filter((channel) => channel.id !== payload.id)
+      const newChannels = draftChannels.filter(channel => channel.id !== payload.id)
       const state = store.getState()
 
       if (state.ui.activeChannelId === payload.id) {
