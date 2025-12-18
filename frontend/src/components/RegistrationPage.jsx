@@ -47,7 +47,7 @@ const RegistrationPage = () => {
           if (err.response?.status === 409) {
             setRegistrationFailed(true)
             inputRef.current.select()
-          } 
+          }
           else {
             rollbar.error('RegistrationPage sendData error', err)
             toast.error(t('error.network'))
