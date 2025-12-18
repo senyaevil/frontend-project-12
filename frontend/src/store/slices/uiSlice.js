@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 import Api from '../middlewares/index.js'
 
@@ -24,13 +23,13 @@ const slice = createSlice({
       state.modal.component = component
       state.modal.channelId = channel?.id ?? null
     },
-    closeModal: state => {
+    closeModal: (state) => {
       state.modal.isOpened = false
       state.modal.component = null
       state.modal.channelId = null
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder.addMatcher(
       channelsApi.endpoints.addChannel.matchFulfilled,
       (state, { payload: { id } }) => {
