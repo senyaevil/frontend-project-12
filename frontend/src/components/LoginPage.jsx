@@ -44,7 +44,7 @@ const LoginPage = () => {
           if (err.response?.status === 401) {
             setAuthFailed(true)
             inputRef.current.focus()
-          } 
+          }
           else {
             rollbar.error('LoginPage sendData error', err)
             toast.error(t('error.network'))
