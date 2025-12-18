@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import leoProfanity from 'leo-profanity'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Button, Form, InputGroup } from 'react-bootstrap'
 import { Send } from 'react-bootstrap-icons'
 import { useTranslation } from 'react-i18next'
@@ -32,7 +32,7 @@ const MessageForm = () => {
         channelId: activeChannelId,
         username,
       }
-
+      
       addMessage(message)
       formik.resetForm()
 
@@ -76,11 +76,11 @@ const MessageForm = () => {
             <Send size={18} />
           </Button>
           {(isError || !formik.isValid) && (
-          <Form.Control.Feedback type="invalid" tooltip>
-            {addMessageError?.error}
-            {' '}
-            {t(formik.errors?.message)}
-          </Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid" tooltip>
+              {addMessageError?.error}
+              {' '}
+              {t(formik.errors?.message)}
+            </Form.Control.Feedback>
           )}
         </InputGroup>
       </Form>
