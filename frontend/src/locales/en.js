@@ -70,6 +70,6 @@ const en = {
       submit: 'Sign up',
     },
   },
-};
+}
 
-export default en;
+export default en

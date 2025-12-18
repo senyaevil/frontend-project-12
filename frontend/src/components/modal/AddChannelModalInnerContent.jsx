@@ -1,29 +1,29 @@
-import { useRollbar } from '@rollbar/react';
-import { useFormik } from 'formik';
-import leoProfanity from 'leo-profanity';
-import React, { useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import { useRollbar } from '@rollbar/react'
+import { useFormik } from 'formik'
+import leoProfanity from 'leo-profanity'
+import React, { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import {
   Button, Form, InputGroup, Modal as BsModal,
-} from 'react-bootstrap';
-import { getChannelNameSchema } from '../../lib/validation';
-import { actions } from '../../store';
-import { useAddChannelMutation, useGetChannelsQuery } from '../../store/middlewares';
+} from 'react-bootstrap'
+import { getChannelNameSchema } from '../../lib/validation'
+import { actions } from '../../store'
+import { useAddChannelMutation, useGetChannelsQuery } from '../../store/middlewares'
 
 const AddChannelModalInnerContent = () => {
-  const { data: channels } = useGetChannelsQuery();
-  const channelNames = channels.map(({ name }) => name);
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const [addChannel, { error: addChannelError, isError, isSuccess }] = useAddChannelMutation();
-  const inputRef = useRef(null);
-  const rollbar = useRollbar();
+  const { data: channels } = useGetChannelsQuery()
+  const channelNames = channels.map(({ name }) => name)
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const [addChannel, { error: addChannelError, isError, isSuccess }] = useAddChannelMutation()
+  const inputRef = useRef(null)
+  const rollbar = useRollbar()
 
   const handleClose = () => {
-    dispatch(actions.closeModal());
-  };
+    dispatch(actions.closeModal())
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -32,34 +32,34 @@ const AddChannelModalInnerContent = () => {
     validationSchema: getChannelNameSchema(channelNames),
     validateOnBlur: true,
     onSubmit: async (values, { setSubmitting }) => {
-      console.debug('AddChannelModal values', values);
+      console.debug('AddChannelModal values', values)
 
-      setSubmitting(true);
+      setSubmitting(true)
 
       const data = {
         name: leoProfanity.clean(values.name),
-      };
+      }
 
-      addChannel(data);
-      setSubmitting(false);
+      addChannel(data)
+      setSubmitting(false)
     },
-  });
+  })
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+    inputRef.current.focus()
+  }, [])
 
   if (isSuccess) {
-    handleClose();
-    toast.success(t('channel.created'));
-    return null;
+    handleClose()
+    toast.success(t('channel.created'))
+    return null
   }
 
   if (isError) {
-    handleClose();
-    rollbar.error('AddChannelModalInnerContent addChannelError', addChannelError);
-    toast.error(t('error.network'));
-    return null;
+    handleClose()
+    rollbar.error('AddChannelModalInnerContent addChannelError', addChannelError)
+    toast.error(t('error.network'))
+    return null
   }
 
   return (
@@ -114,7 +114,7 @@ const AddChannelModalInnerContent = () => {
         </Form>
       </BsModal.Body>
     </>
-  );
-};
+  )
+}
 
-export default AddChannelModalInnerContent;
+export default AddChannelModalInnerContent

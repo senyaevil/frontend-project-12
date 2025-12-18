@@ -1,27 +1,27 @@
-import { useRollbar } from '@rollbar/react';
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
-import { Card, Form, Button } from 'react-bootstrap';
-import { useNavigate, Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import { actions } from '../store';
-import { sendData } from '../api/httpApi.js';
-import avatar2 from '../assets/images/avatar-2.jpg';
-import routes from '../api/routes.js';
+import { useRollbar } from '@rollbar/react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useFormik } from 'formik'
+import { Card, Form, Button } from 'react-bootstrap'
+import { useNavigate, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
+import { actions } from '../store'
+import { sendData } from '../api/httpApi.js'
+import avatar2 from '../assets/images/avatar-2.jpg'
+import routes from '../api/routes.js'
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const [authFailed, setAuthFailed] = useState(false);
-  const inputRef = useRef();
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-  const rollbar = useRollbar();
+  const dispatch = useDispatch()
+  const [authFailed, setAuthFailed] = useState(false)
+  const inputRef = useRef()
+  const navigate = useNavigate()
+  const { t } = useTranslation()
+  const rollbar = useRollbar()
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+    inputRef.current.focus()
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -29,32 +29,32 @@ const LoginPage = () => {
       password: '',
     },
     onSubmit: (values, { setSubmitting }) => {
-      console.debug('LoginPage values', values);
-      setAuthFailed(false);
-      setSubmitting(true);
+      console.debug('LoginPage values', values)
+      setAuthFailed(false)
+      setSubmitting(true)
 
       sendData({
         url: routes.loginPath(),
         data: values,
-        onSuccessCb: (resp) => {
-          dispatch(actions.setCredentials(resp.data));
-          navigate(routes.rootPage());
+        onSuccessCb: resp => {
+          dispatch(actions.setCredentials(resp.data))
+          navigate(routes.rootPage())
         },
-        onErrorCb: (err) => {
+        onErrorCb: err => {
           if (err.response?.status === 401) {
-            setAuthFailed(true);
-            inputRef.current.focus();
+            setAuthFailed(true)
+            inputRef.current.focus()
           } else {
-            rollbar.error('LoginPage sendData error', err);
-            toast.error(t('error.network'));
+            rollbar.error('LoginPage sendData error', err)
+            toast.error(t('error.network'))
           }
         },
         onFinallyCb: () => {
-          setSubmitting(false);
+          setSubmitting(false)
         },
-      });
+      })
     },
-  });
+  })
 
   return (
     <div className="container-fluid h-100 d-flex justify-content-center align-content-center">
@@ -117,7 +117,7 @@ const LoginPage = () => {
         </Card.Footer>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

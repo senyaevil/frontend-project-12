@@ -1,28 +1,28 @@
-import { useRollbar } from '@rollbar/react';
-import { useFormik } from 'formik';
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { sendData } from '../api/httpApi';
-import routes from '../api/routes';
-import avatar1 from '../assets/images/avatar-1.jpg';
-import { signUpSchema } from '../lib/validation';
-import { actions } from '../store';
+import { useRollbar } from '@rollbar/react'
+import { useFormik } from 'formik'
+import React, { useEffect, useRef, useState } from 'react'
+import { Button, Card, Form } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { sendData } from '../api/httpApi'
+import routes from '../api/routes'
+import avatar1 from '../assets/images/avatar-1.jpg'
+import { signUpSchema } from '../lib/validation'
+import { actions } from '../store'
 
 const RegistrationPage = () => {
-  const [registrationFailed, setRegistrationFailed] = useState(false);
-  const inputRef = useRef();
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const rollbar = useRollbar();
+  const [registrationFailed, setRegistrationFailed] = useState(false)
+  const inputRef = useRef()
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const rollbar = useRollbar()
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+    inputRef.current.focus()
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -33,31 +33,31 @@ const RegistrationPage = () => {
     validationSchema: signUpSchema,
     validateOnBlur: false,
     onSubmit: async (values, { setSubmitting }) => {
-      console.debug('RegistrationPage values', values);
-      setRegistrationFailed(false);
+      console.debug('RegistrationPage values', values)
+      setRegistrationFailed(false)
 
       sendData({
         url: routes.signupPath(),
         data: { username: values.username, password: values.password },
-        onSuccessCb: (resp) => {
-          dispatch(actions.setCredentials(resp.data));
-          navigate(routes.rootPage());
+        onSuccessCb: resp => {
+          dispatch(actions.setCredentials(resp.data))
+          navigate(routes.rootPage())
         },
-        onErrorCb: (err) => {
+        onErrorCb: err => {
           if (err.response?.status === 409) {
-            setRegistrationFailed(true);
-            inputRef.current.select();
+            setRegistrationFailed(true)
+            inputRef.current.select()
           } else {
-            rollbar.error('RegistrationPage sendData error', err);
-            toast.error(t('error.network'));
+            rollbar.error('RegistrationPage sendData error', err)
+            toast.error(t('error.network'))
           }
         },
         onFinallyCb: () => {
-          setSubmitting(false);
+          setSubmitting(false)
         },
-      });
+      })
     },
-  });
+  })
 
   return (
     <div className="h-100 row justify-content-center align-content-center">
@@ -145,7 +145,7 @@ const RegistrationPage = () => {
         </Card.Body>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default RegistrationPage;
+export default RegistrationPage

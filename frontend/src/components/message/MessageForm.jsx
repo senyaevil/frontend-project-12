@@ -1,21 +1,21 @@
-import { useFormik } from 'formik';
-import leoProfanity from 'leo-profanity';
-import React, { useEffect, useRef } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
-import { Send } from 'react-bootstrap-icons';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { messageSchema } from '../../lib/validation';
-import { useAddMessageMutation } from '../../store/middlewares';
+import { useFormik } from 'formik'
+import leoProfanity from 'leo-profanity'
+import React, { useEffect, useRef } from 'react'
+import { Button, Form, InputGroup } from 'react-bootstrap'
+import { Send } from 'react-bootstrap-icons'
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { messageSchema } from '../../lib/validation'
+import { useAddMessageMutation } from '../../store/middlewares'
 
 const MessageForm = () => {
-  const { t } = useTranslation();
-  const activeChannelId = useSelector((state) => state.ui.activeChannelId);
-  const username = useSelector((state) => state.auth.username);
-  const inputRef = useRef(null);
+  const { t } = useTranslation()
+  const activeChannelId = useSelector(state => state.ui.activeChannelId)
+  const username = useSelector(state => state.auth.username)
+  const inputRef = useRef(null)
   const [addMessage, {
     error: addMessageError, isError, isLoading,
-  }] = useAddMessageMutation();
+  }] = useAddMessageMutation()
 
   const formik = useFormik({
     initialValues: {
@@ -24,28 +24,28 @@ const MessageForm = () => {
     validationSchema: messageSchema,
     validateOnBlur: false,
     onSubmit: async (values, { setSubmitting }) => {
-      console.debug('MessageForm values', values);
-      setSubmitting(true);
+      console.debug('MessageForm values', values)
+      setSubmitting(true)
 
       const message = {
         body: leoProfanity.clean(values.message),
         channelId: activeChannelId,
         username,
-      };
+      }
 
-      addMessage(message);
-      formik.resetForm();
+      addMessage(message)
+      formik.resetForm()
 
       if (!isLoading) {
-        setSubmitting(false);
-        inputRef.current.focus();
+        setSubmitting(false)
+        inputRef.current.focus()
       }
     },
-  });
+  })
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, [activeChannelId, formik.isSubmitting]);
+    inputRef.current.focus()
+  }, [activeChannelId, formik.isSubmitting])
 
   return (
     <div className="mt-auto px-5 pt-3 pb-5">
@@ -85,7 +85,7 @@ const MessageForm = () => {
         </InputGroup>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default MessageForm;
+export default MessageForm

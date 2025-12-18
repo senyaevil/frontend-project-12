@@ -1,15 +1,15 @@
-import { Container, Navbar, Button } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../store';
-import routes from '../api/routes.js';
+import { Container, Navbar, Button } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { actions } from '../store'
+import routes from '../api/routes.js'
 
 const Nav = () => {
-  const authState = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const authState = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
 
-  const logout = () => dispatch(actions.removeCredentials());
+  const logout = () => dispatch(actions.removeCredentials())
 
   return (
     <Navbar className="shadow-sm" bg="white" expand="lg" data-bs-theme="light">
@@ -18,7 +18,7 @@ const Nav = () => {
         {authState.userToken && <Button onClick={logout} variant="secondary">{t('Navigation.logout')}</Button>}
       </Container>
     </Navbar>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

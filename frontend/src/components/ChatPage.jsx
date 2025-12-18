@@ -1,16 +1,16 @@
-import { useGetChannelsQuery, useGetMessagesQuery } from '../store/middlewares';
-import { Channels } from './channel';
-import { MessageForm, Messages } from './message';
-import { Modal } from './modal';
-import Spinner from './Spinner.jsx';
+import { useGetChannelsQuery, useGetMessagesQuery } from '../store/middlewares'
+import { Channels } from './channel'
+import { MessageForm, Messages } from './message'
+import { Modal } from './modal'
+import Spinner from './Spinner.jsx'
 
 const ChatPage = () => {
-  const { isLoading: isChannelsLoading } = useGetChannelsQuery();
-  const { isLoading: isMessagesLoading } = useGetMessagesQuery();
-  const isLoading = isChannelsLoading || isMessagesLoading;
+  const { isLoading: isChannelsLoading } = useGetChannelsQuery()
+  const { isLoading: isMessagesLoading } = useGetMessagesQuery()
+  const isLoading = isChannelsLoading || isMessagesLoading
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner />
   }
 
   return (
@@ -28,7 +28,7 @@ const ChatPage = () => {
       </div>
       <Modal />
     </>
-  );
-};
+  )
+}
 
-export default ChatPage;
+export default ChatPage

@@ -1,11 +1,11 @@
-import { Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import image from '../assets/images/404.svg';
-import routes from '../api/routes';
+import { Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import image from '../assets/images/404.svg'
+import routes from '../api/routes'
 
 const NotFoundPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className="text-center h-75">
@@ -19,7 +19,7 @@ const NotFoundPage = () => {
         <Link to={routes.rootPage()}>{t('notFoundPage.linkText')}</Link>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

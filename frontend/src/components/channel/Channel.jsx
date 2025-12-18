@@ -1,26 +1,26 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
-import { actions } from '../../store';
+import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { Button, ButtonGroup, Dropdown } from 'react-bootstrap'
+import { actions } from '../../store'
 
 const Channel = ({ data }) => {
-  const { id, name, removable } = data;
-  const activeChannelId = useSelector((state) => state.ui.activeChannelId);
-  const { t } = useTranslation();
-  const variant = id === activeChannelId ? 'secondary' : null;
-  const dispatch = useDispatch();
+  const { id, name, removable } = data
+  const activeChannelId = useSelector(state => state.ui.activeChannelId)
+  const { t } = useTranslation()
+  const variant = id === activeChannelId ? 'secondary' : null
+  const dispatch = useDispatch()
 
   const handleSelectChannelBtnClick = () => {
-    dispatch(actions.setActiveChannelId({ id }));
-  };
+    dispatch(actions.setActiveChannelId({ id }))
+  }
 
   const handleRenameChannelItemClick = () => {
-    dispatch(actions.openModal({ component: 'rename', channel: { id } }));
-  };
+    dispatch(actions.openModal({ component: 'rename', channel: { id } }))
+  }
 
   const handleRemoveChannelItemClick = () => {
-    dispatch(actions.openModal({ component: 'remove', channel: { id } }));
-  };
+    dispatch(actions.openModal({ component: 'remove', channel: { id } }))
+  }
 
   return (
     <li key={id} className="w-100 nav-item">
@@ -59,7 +59,7 @@ const Channel = ({ data }) => {
         </Button>
       )}
     </li>
-  );
-};
+  )
+}
 
-export default Channel;
+export default Channel

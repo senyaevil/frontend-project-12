@@ -72,6 +72,6 @@ const ru = {
       submit: 'Зарегистрироваться',
     },
   },
-};
+}
 
-export default ru;
+export default ru

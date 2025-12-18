@@ -1,49 +1,48 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import routes from '../../api/routes.js';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import routes from '../../api/routes.js'
 
 const messagesApi = createApi({
   reducerPath: 'messagesApi',
   baseQuery: fetchBaseQuery({
     baseUrl: routes.messagesPath(),
     prepareHeaders: (headers, { getState }) => {
-      const { auth: { userToken } } = getState();
+      const { auth: { userToken } } = getState()
 
       if (userToken) {
-        headers.set('Authorization', `Bearer ${userToken}`);
+        headers.set('Authorization', `Bearer ${userToken}`)
       }
 
-      return headers;
+      return headers
     },
   }),
   tagTypes: ['Messages'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getMessages: builder.query({
       query: () => '',
       providesTags: ['Messages'],
     }),
     addMessage: builder.mutation({
-      query: (message) => ({
+      query: message => ({
         method: 'POST',
         body: message,
       }),
       invalidatesTags: ['Messages'],
     }),
     editMessage: builder.mutation({
-      query: (message) => ({
+      query: message => ({
         method: 'PATCH',
         body: message,
       }),
       invalidatesTags: ['Messages'],
     }),
     removeMessage: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: id,
         method: 'DELETE',
       }),
       invalidatesTags: ['Messages'],
     }),
   }),
+})
 
-});
-
-export default messagesApi;
+export default messagesApi

@@ -1,47 +1,47 @@
-import { useRollbar } from '@rollbar/react';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { Button, Modal as BsModal } from 'react-bootstrap';
-import store, { actions } from '../../store';
-import { useRemoveChannelMutation } from '../../store/middlewares';
+import { useRollbar } from '@rollbar/react'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { Button, Modal as BsModal } from 'react-bootstrap'
+import store, { actions } from '../../store'
+import { useRemoveChannelMutation } from '../../store/middlewares'
 
 const RemoveChannelModalInnerContent = () => {
-  const channelId = useSelector((state) => state.ui.modal.channelId);
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const channelId = useSelector(state => state.ui.modal.channelId)
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const [removeChannel,
     { error: removeChannelError, isError, isSuccess },
-  ] = useRemoveChannelMutation();
-  const state = store.getState();
-  const rollbar = useRollbar();
+  ] = useRemoveChannelMutation()
+  const state = store.getState()
+  const rollbar = useRollbar()
 
   const handleClose = () => {
-    dispatch(actions.closeModal());
-  };
+    dispatch(actions.closeModal())
+  }
 
   const handleRemove = async () => {
-    console.debug('RemoveChannelModal channelId', channelId);
+    console.debug('RemoveChannelModal channelId', channelId)
 
-    setLoading(true);
-    removeChannel(channelId);
-    setLoading(false);
-  };
+    setLoading(true)
+    removeChannel(channelId)
+    setLoading(false)
+  }
 
   if (isSuccess) {
-    dispatch(actions.setActiveChannelId({ id: state.ui.defaultChannelId }));
-    handleClose();
-    toast.success(t('channel.removed'));
-    return null;
+    dispatch(actions.setActiveChannelId({ id: state.ui.defaultChannelId }))
+    handleClose()
+    toast.success(t('channel.removed'))
+    return null
   }
 
   if (isError) {
-    handleClose();
-    rollbar.error('RemoveChannelModalInnerContent removeChannelError', removeChannelError);
-    toast.error(t('error.network'));
-    return null;
+    handleClose()
+    rollbar.error('RemoveChannelModalInnerContent removeChannelError', removeChannelError)
+    toast.error(t('error.network'))
+    return null
   }
 
   return (
@@ -80,7 +80,7 @@ const RemoveChannelModalInnerContent = () => {
         </div>
       </BsModal.Body>
     </>
-  );
-};
+  )
+}
 
-export default RemoveChannelModalInnerContent;
+export default RemoveChannelModalInnerContent

@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const noop = () => { };
+const noop = () => { }
 
 const request = (
   {
@@ -17,18 +17,18 @@ const request = (
   data,
   timeout: 5000,
 })
-  .then((resp) => {
-    console.debug(resp);
-    onSuccessCb(resp);
+  .then(resp => {
+    console.debug(resp)
+    onSuccessCb(resp)
   })
-  .catch((err) => {
-    console.error(err);
-    onErrorCb(err);
+  .catch(err => {
+    console.error(err)
+    onErrorCb(err)
   })
-  .finally(() => onFinallyCb());
+  .finally(() => onFinallyCb())
 
-const getData = (config) => request({ method: 'get', ...config });
+const getData = config => request({ method: 'get', ...config })
 
-const sendData = (config) => request({ method: 'post', ...config });
+const sendData = config => request({ method: 'post', ...config })
 
-export { getData, sendData };
+export { getData, sendData }

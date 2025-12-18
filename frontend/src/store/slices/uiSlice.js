@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
-import Api from '../middlewares/index.js';
+import { createSlice } from '@reduxjs/toolkit'
+import Api from '../middlewares/index.js'
 
-const { channelsApi } = Api;
+const { channelsApi } = Api
 
 const slice = createSlice({
   name: 'ui',
@@ -17,29 +17,29 @@ const slice = createSlice({
   },
   reducers: {
     setActiveChannelId(state, { payload: { id } }) {
-      state.activeChannelId = id;
+      state.activeChannelId = id
     },
     openModal: (state, { payload: { component, channel } }) => {
-      state.modal.isOpened = true;
-      state.modal.component = component;
-      state.modal.channelId = channel?.id ?? null;
+      state.modal.isOpened = true
+      state.modal.component = component
+      state.modal.channelId = channel?.id ?? null
     },
-    closeModal: (state) => {
-      state.modal.isOpened = false;
-      state.modal.component = null;
-      state.modal.channelId = null;
+    closeModal: state => {
+      state.modal.isOpened = false
+      state.modal.component = null
+      state.modal.channelId = null
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addMatcher(
       channelsApi.endpoints.addChannel.matchFulfilled,
       (state, { payload: { id } }) => {
-        state.activeChannelId = id;
+        state.activeChannelId = id
       },
-    );
+    )
   },
-});
+})
 
-export const { actions } = slice;
+export const { actions } = slice
 
-export default slice.reducer;
+export default slice.reducer

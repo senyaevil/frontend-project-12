@@ -1,18 +1,18 @@
 import {
   BrowserRouter, Routes, Route, Navigate,
-} from 'react-router-dom';
-import '../assets/styles/styles.scss';
-import { useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import NotFoundPage from './NotFoundPage.jsx';
-import ChatPage from './ChatPage.jsx';
-import LoginPage from './LoginPage.jsx';
-import Navigation from './Navigation.jsx';
-import RegistrationPage from './RegistrationPage';
-import routes from '../api/routes.js';
+} from 'react-router-dom'
+import '../assets/styles/styles.scss'
+import { useSelector } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
+import NotFoundPage from './NotFoundPage.jsx'
+import ChatPage from './ChatPage.jsx'
+import LoginPage from './LoginPage.jsx'
+import Navigation from './Navigation.jsx'
+import RegistrationPage from './RegistrationPage'
+import routes from '../api/routes.js'
 
 const App = () => {
-  const authState = useSelector((state) => state.auth);
+  const authState = useSelector(state => state.auth)
 
   return (
     <BrowserRouter>
@@ -35,7 +35,7 @@ const App = () => {
         newestOnTop
       />
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default App;
+export default App

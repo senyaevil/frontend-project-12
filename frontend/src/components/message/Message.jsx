@@ -1,5 +1,5 @@
 const Message = ({ data }) => {
-  const { username, body } = data;
+  const { username, body } = data
 
   return (
     <div className="mb-2 text-break">
@@ -7,7 +7,7 @@ const Message = ({ data }) => {
       {': '}
       {body}
     </div>
-  );
-};
+  )
+}
 
-export default Message;
+export default Message

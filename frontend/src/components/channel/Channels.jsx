@@ -1,19 +1,19 @@
-import { useTranslation } from 'react-i18next';
-import { Button } from 'react-bootstrap';
-import { Plus } from 'react-bootstrap-icons';
-import { useDispatch } from 'react-redux';
-import { useGetChannelsQuery } from '../../store/middlewares';
-import Channel from './Channel.jsx';
-import { actions } from '../../store';
+import { useTranslation } from 'react-i18next'
+import { Button } from 'react-bootstrap'
+import { Plus } from 'react-bootstrap-icons'
+import { useDispatch } from 'react-redux'
+import { useGetChannelsQuery } from '../../store/middlewares'
+import Channel from './Channel.jsx'
+import { actions } from '../../store'
 
 const Channels = () => {
-  const { t } = useTranslation();
-  const { data: channels } = useGetChannelsQuery();
-  const dispatch = useDispatch();
+  const { t } = useTranslation()
+  const { data: channels } = useGetChannelsQuery()
+  const dispatch = useDispatch()
 
   const handleAddChannelBtnClick = () => {
-    dispatch(actions.openModal({ component: 'add' }));
-  };
+    dispatch(actions.openModal({ component: 'add' }))
+  }
 
   return (
     <div>
@@ -32,12 +32,12 @@ const Channels = () => {
         </Button>
       </div>
       <ul id="channels-box" className="h-100 d-block flex-column nav nav-pills nav-fill px-2 mb-3 overflow-auto">
-        {channels.map((channel) => (
+        {channels.map(channel => (
           <Channel key={channel.id} data={channel} />
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Channels;
+export default Channels
