@@ -1,5 +1,5 @@
 import { useRollbar } from '@rollbar/react'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import { Card, Form, Button } from 'react-bootstrap'
@@ -36,15 +36,16 @@ const LoginPage = () => {
       sendData({
         url: routes.loginPath(),
         data: values,
-        onSuccessCb: resp => {
+        onSuccessCb: (resp) => {
           dispatch(actions.setCredentials(resp.data))
           navigate(routes.rootPage())
         },
-        onErrorCb: err => {
+        onErrorCb: (err) => {
           if (err.response?.status === 401) {
             setAuthFailed(true)
             inputRef.current.focus()
-          } else {
+          } 
+          else {
             rollbar.error('LoginPage sendData error', err)
             toast.error(t('error.network'))
           }
