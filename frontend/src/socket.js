@@ -20,7 +20,7 @@ const socketInit = (store) => {
 
   socket.on('renameChannel', (payload) => {
     store.dispatch(channelsApi.util.updateQueryData('getChannels', undefined, (draftChannels) => {
-      const channel = draftChannels.find((item) => item.id === payload.id)
+      const channel = draftChannels.find(item => item.id === payload.id)
       channel.name = payload.name
     }))
   })
